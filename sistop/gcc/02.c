@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define mem_so  20
 #define mem_max 80
@@ -29,18 +30,18 @@ int main() {
 }
 
 void crear_lista(void) {
-    int nuevo_elemento, r;
+    int r;
     do {
         if (Plista == NULL) {
             Plista = (nodo_lista *)malloc(sizeof(nodo_lista));
 
             Plista->num_particion = 0;
-            Plista->capacidad = mem_so;
-            Plista->loc_inicial = 0;
-            Plista->loc_final = mem_so - 1;
-            Plista->estado = 1;
-            Plista->asignacion = 0;
-            Plista->frag_interna = 0;
+            Plista->capacidad     = mem_so;
+            Plista->loc_inicial   = 0;
+            Plista->loc_final     = mem_so - 1;
+            Plista->estado        = 0;
+            Plista->asignacion    = 0;
+            Plista->frag_interna  = 0;
 
             Plista->sig = NULL;
             Qlista = Plista;
@@ -50,8 +51,6 @@ void crear_lista(void) {
                 scanf("%d", &r);
 
                 if(r < (mem_max - Qlista->loc_final)){
-                    printf("\nMem disponible, creando bloque...");
-
                     Nuevolista = (nodo_lista *)malloc(sizeof(nodo_lista));
 
                     Nuevolista->num_particion = Qlista->num_particion + 1;
@@ -77,7 +76,7 @@ void crear_lista(void) {
         scanf("%d", &r);
     } while (r == 1);
 
-    if(mem_max - Qlista->loc_final > 0) {
+    if((mem_max - 1) - Qlista->loc_final > 0) {
         Nuevolista = (nodo_lista *)malloc(sizeof(nodo_lista));
 
         Nuevolista->num_particion = Qlista->num_particion + 1;
@@ -100,7 +99,7 @@ void ver_lista(void) {
     Aux = Plista;
     printf("\nNo particion\tCapacidad\tLoc inicial\tLoc final\tEstado\t\tAsignacion\tFrag interna");
     while (Aux != NULL) {
-        printf("\n%d \t\t%d \t\t%d \t\t%d \t\t%d \t\t%d \t\t%d",
+        printf("\nP%d \t\t%dk \t\t%dk \t\t%dk \t\t%d \t\t%d \t\t%d",
                 Aux->num_particion,
                 Aux->capacidad,
                 Aux->loc_inicial,
