@@ -3,6 +3,7 @@
 #include <ctype.h>
 
 void token_identifica(char * cadena);
+int token_identifica_palabra_reservada(char * cadena);
 
 int main(int argc, char *argv[])
 {
@@ -124,6 +125,9 @@ void token_identifica(char * cadena)
     }
     switch(estado)
     {
+        case -1:
+                printf("Token desconocido\n");
+            break;
         case 2:
             printf("Se identificó un número entero\n");
             break;
@@ -134,7 +138,10 @@ void token_identifica(char * cadena)
             printf("Se identificó un número exponencial\n");
             break;
         case 7:
-            printf("Se identificó un nombre de variable\n");
+            if(token_identifica_palabra_reservada(cadena) == 1)
+                printf("Se identifico una palabra reservada\n");
+            else
+                printf("Se identificó un nombre de variable\n");
             break;
         case 8:
         case 9:
@@ -155,3 +162,16 @@ void token_identifica(char * cadena)
     }
 }
 
+int token_identifica_palabra_reservada(char * cadena)
+{
+    if(strcmp(cadena, "if") == 0)
+        return 1;
+    else if(strcmp(cadena, "else") == 0)
+        return 1;
+    else if(strcmp(cadena, "while") == 0)
+        return 1;
+    else if(strcmp(cadena, "do") == 0)
+        return 1;
+    else if(strcmp(cadena, "for") == 0)
+        return 1;
+}
