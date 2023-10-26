@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- esta página verifica los datos ingresados, si son incorrectos envia un error -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Práctica 4.5</title>
+  </head>
+  <body>
+    <p>Verificador de dirección IP y MAC</p>
+    <p>Ingresa tus dados siguiendo el formato indicado:</p>
+    <form>
+        <!-- nombre completo, IP, MAC, correo, telefono -->
+        <label for="nombre">Nombre completo:</label><br>
+        <input type="text" id="nombre" pattern=".+" name="nombre" required><br><br>
+        <!-- <small>Ejemplo: 1234567890</small><br><br> -->
+
+        <label for="ip">Dirección IP:</label><br>
+        <input type="text" id="ip" name="ip" pattern="(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" required><br>
+        <small>Ejemplo: 127.0.0.1</small><br><br>
+
+        <label for="mac">Dirección física:</label><br>
+        <!-- <input type="text" id="mac" pattern="(([0-9A-F][0-9A-F])\:){5}([0-9A-F][0-9A-F])" name="mac" required><br> -->
+        <input type="text" id="mac" pattern="^[a-fA-F0-9]{2}(:[a-fA-F0-9]{2}){5}$" name="mac" required><br>
+        <small>Ejemplo: C6:D3:92:65:F3:34</small><br><br>
+
+        <label for="correo">Correo:</label><br>
+        <input type="email" id="correo" pattern=".+@.+\.[com|net]" name="correo" required><br>
+        <small>Ejemplo: persona@mail.net</small><br><br>
+
+        <label for="telefono">Teléfono:</label><br>
+        <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" required><br>
+        <small>Ejemplo: 1234567890</small><br><br>
+
+        <input type="submit" value="Enviar">
+        <!-- <script> -->
+        <!--     document.getElementById("nombre").style.color = "red"; -->
+        <!--     document.getElementById("nombre").style.backgroundColor = "gray"; -->
+        <!-- </script> -->
+    </form>
+  </body>
+</html>
